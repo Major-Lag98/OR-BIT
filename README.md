@@ -1,2 +1,2 @@
 # OR-BIT
-Ultra Casual Tetris-Like for mobile
+Ultra Casual Mobile about fitting things in a limited space
