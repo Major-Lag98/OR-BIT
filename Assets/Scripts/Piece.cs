@@ -9,7 +9,7 @@ public class Piece : MonoBehaviour
     {
         Idle,
         Moving,
-        Used,
+        Resting,
         CrossedLine //maybe use this to discentigrate object like in Trickey Towers
     }
 
@@ -36,7 +36,7 @@ public class Piece : MonoBehaviour
 
     private void Update()
     {
-        if (_pieceState == PieceState.Used) return; //do nothing if we have used
+        if (_pieceState == PieceState.Resting) return; //do nothing if we have used
 
         
 
@@ -61,7 +61,7 @@ public class Piece : MonoBehaviour
                     waitTime -= Time.deltaTime;
                     if (waitTime <= 0)
                     {
-                        _pieceState = PieceState.Used;
+                        _pieceState = PieceState.Resting;
                         //transform.parent = _world.transform;
                         LevelStateMachine.Instance.ReadyNextPiece();
                     }
@@ -81,7 +81,7 @@ public class Piece : MonoBehaviour
 
     private void FixedUpdate() //fixedupdate should be used for physics
     {
-        if (_pieceState == PieceState.Moving || _pieceState == PieceState.Used)
+        if (_pieceState == PieceState.Moving || _pieceState == PieceState.Resting)
         {
             //float distance = Vector2.Distance(_world.transform.position, this.transform.position);
             Vector3 direction = _world.transform.position - transform.position;
