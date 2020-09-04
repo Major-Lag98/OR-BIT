@@ -1,2 +1,2 @@
 # OR-BIT
-Ultra Casual Mobile Game about fitting things in a limited space
+Ultra Casual Mobile Game about fitting stuff in a limited space
