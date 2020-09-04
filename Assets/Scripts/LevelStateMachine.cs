@@ -5,6 +5,10 @@ using UnityEngine;
 public class LevelStateMachine : MonoBehaviour
 {
 
+    [SerializeField] GameObject Piece = null;
+
+    [SerializeField] Transform spawnPosition;
+
     public enum State 
     {
         Intro,      //Let things smoothly settle in after scene load
@@ -27,4 +31,15 @@ public class LevelStateMachine : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ReadyNextPiece();
+    }
+
+
+    public void ReadyNextPiece()
+    {
+        Instantiate(Piece, spawnPosition.position, Quaternion.identity);
+        state = State.Idle;
+    }
 }

@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//NOW OBSOLETE
+
+
+
 public class Gravity : MonoBehaviour
 {
 
