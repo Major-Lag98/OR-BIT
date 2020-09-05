@@ -145,4 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _world: {fileID: 5169046240365430703, guid: 10949a872a6fb654584eed9125614243, type: 3}
+  _limit: {fileID: 8723376491253853846, guid: 84f335b176e23e4428688bdd9899f8ec, type: 3}
   _gravityScale: 9.81
+  WaitTimeMax: 2

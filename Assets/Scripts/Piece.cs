@@ -18,16 +18,22 @@ public class Piece : MonoBehaviour
 
     [SerializeField] GameObject _world;
 
+    EdgeCollider2D _limit; //try to make this a reference!!
+
     [SerializeField] float _gravityScale = 9.81f;
+
+    BoxCollider2D myCollider;
 
     Rigidbody2D rb;
 
     float waitTime; 
-    [SerializeField] float WaitTimeMax = 5f;
+    [SerializeField] float WaitTimeMax = 2f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        myCollider = GetComponent<BoxCollider2D>();
+        _limit = GameObject.Find("Limit").GetComponent<EdgeCollider2D>(); //I have to use this mess because referencing a prefab doesnt work for some reason... maybe make a singleton that holds objects in the scene to reference?
         
     }
     private void Start()
@@ -56,16 +62,21 @@ public class Piece : MonoBehaviour
                 break;
 
             case LevelStateMachine.State.Playing: //We wait for the object to come to a rest
-                //Debug.Log(rb.velocity.magnitude);
                 if (rb.velocity.magnitude <= 0.5f)
                 {
                     waitTime -= Time.deltaTime;
                     if (waitTime <= 0)
                     {
                         _pieceState = PieceState.Resting;
-                        ValidatePiecePlacement();
-                        LevelStateMachine.Instance.ReadyNextPiece();
-                        //transform.parent = _world.transform;
+                        if (Physics2D.IsTouching(myCollider, _limit)) //check if we are touching the limit
+                        {
+                            Debug.Log("we have lost");
+                            LevelStateMachine.Instance.state = LevelStateMachine.State.Lose;
+                        }
+                        else
+                        {
+                            LevelStateMachine.Instance.ReadyNextPiece();
+                        }
                     }
                 }
                 else
@@ -77,43 +88,12 @@ public class Piece : MonoBehaviour
         }
     }
 
-    private void ValidatePiecePlacement()
-    {
-        var bounds = GetComponent<BoxCollider2D>().bounds;
-
-        if (IsOutsideBounds(transform.position, bounds))
-        {
-            LevelStateMachine.Instance.state = LevelStateMachine.State.Lose;
-            Debug.Log("we have lost");
-        }
-    }
-
-    private bool IsOutsideBounds(Vector3 position, Bounds bounds)
-    {
-        // Get the four corners of the collider
-        var tl = new Vector2( position.x - bounds.extents.x,  position.y + bounds.extents.y);
-        var tr = new Vector2(position.x + bounds.extents.x, position.y + bounds.extents.y);
-        var bl = new Vector2(position.x - bounds.extents.x, position.y - bounds.extents.y);
-        var br = new Vector2(position.x + bounds.extents.x, position.y - bounds.extents.y);
-
-        var worldCenter = new Vector2(_world.transform.position.x, _world.transform.position.y);
-
-        Vector2[] points = new Vector2[] { tl, tr, bl, br }; // Put into an array because I want to be lazy and use System.Linq 
-
-        //TODO MAgic number --- WARNING
-        var distance = 2;
-
-        // Then return if any of them are past the limit
-        return points.Any(p => Vector2.Distance(p, worldCenter) >= distance); // Linq.Any returns true if ANY of the array elements return true for the passed in function
-    }
-
     private void FixedUpdate() //fixedupdate should be used for physics
     {
-        if (_pieceState == PieceState.Moving || _pieceState == PieceState.Resting)
+        if (_pieceState == PieceState.Moving || _pieceState == PieceState.Resting) //always be attracted toward planet
         {
-            //float distance = Vector2.Distance(_world.transform.position, this.transform.position);
-            Vector3 direction = _world.transform.position - transform.position;
-            rb.AddForce(direction.normalized * _gravityScale);
+            Vector2 directionToPlanet = _world.transform.position - transform.position;
+            rb.AddForce(directionToPlanet.normalized * _gravityScale);
         }
     }
 }
