@@ -155,6 +155,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &306660949 stripped
+EdgeCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8723376491253853846, guid: 84f335b176e23e4428688bdd9899f8ec, type: 3}
+  m_PrefabInstance: {fileID: 2159473235032673843}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,8 +328,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1734408778}
   - component: {fileID: 1734408777}
+  - component: {fileID: 1734408780}
+  - component: {fileID: 1734408779}
   m_Layer: 0
-  m_Name: LevelStateMachine
+  m_Name: LevelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,6 +366,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1734408779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734408776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f60e9a52c325b748807be30c6fe86f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limitInScene: {fileID: 306660949}
+--- !u!114 &1734408780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734408776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519f56bf46bcbb84b89384ce3db12c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1843620372 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2159473234594325543, guid: 84f335b176e23e4428688bdd9899f8ec, type: 3}
