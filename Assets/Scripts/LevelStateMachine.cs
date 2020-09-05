@@ -39,12 +39,12 @@ public class LevelStateMachine : MonoBehaviour
 
     public void ReadyNextPiece()
     {
-        if (LevelData.Instance.Q_Pieces.Count <= 0) //if dont have any pieces left to ready we have won
+        if (LevelData.Instance.PiecesQueue.Count <= 0) //if dont have any pieces left to ready we have won
         {
             OnWin();
             return;
         }
-        Instantiate(LevelData.Instance.Q_Pieces.Dequeue(), spawnPosition.position, Quaternion.identity);
+        PieceFlinger.Instance.CurrentPieceBeingFlung = Instantiate(LevelData.Instance.PiecesQueue.Dequeue(), spawnPosition.position, Quaternion.identity).transform;
         state = State.Idle;
     }
 

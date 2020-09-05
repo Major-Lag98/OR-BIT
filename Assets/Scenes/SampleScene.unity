@@ -405,6 +405,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2159473234594325543, guid: 84f335b176e23e4428688bdd9899f8ec, type: 3}
   m_PrefabInstance: {fileID: 2159473235032673843}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2096583266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2096583268}
+  - component: {fileID: 2096583267}
+  m_Layer: 0
+  m_Name: Flinger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2096583267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096583266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00499739a8961e34eb2e71cdd43a20e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnPosition: {fileID: 1398994148}
+  CurrentPieceBeingFlung: {fileID: 0}
+  maxFlingForce: 400
+  touchDistanceToStartFlinging: 0.5
+--- !u!4 &2096583268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096583266}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5405169, y: -3.303485, z: -1.2653806}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2159473235032673843
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,17 +13,20 @@ public class LevelData : MonoBehaviour
         {
             Instance = this;
         }
+
+        for (int i = 0; i < _pieces.Count; i++)
+        {
+            PiecesQueue.Enqueue(_pieces[i]);
+        }
     }
 
     [SerializeField] List<GameObject> _pieces;
 
-    public Queue<GameObject> Q_Pieces = new Queue<GameObject>();
+    public Queue<GameObject> PiecesQueue = new Queue<GameObject>();
+
 
     private void Start() //transfer objects from list into queue
     {
-        for (int i =0; i < _pieces.Count; i++)
-        {
-            Q_Pieces.Enqueue(_pieces[i]);
-        }
+        
     }
 }

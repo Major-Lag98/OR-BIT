@@ -6,7 +6,7 @@ using UnityEngine;
 public class Piece : MonoBehaviour
 {
 
-    enum PieceState
+    public enum PieceState
     {
         Idle,
         Moving,
@@ -46,14 +46,14 @@ public class Piece : MonoBehaviour
         switch (LevelStateMachine.Instance.state)
         {
             case LevelStateMachine.State.Idle: //touching the screen makes the object fall toward the planet
-                foreach (Touch touch in Input.touches) 
-                {
-                    if (touch.phase == TouchPhase.Began)
-                    {
-                        _pieceState = PieceState.Moving;
-                        LevelStateMachine.Instance.state = LevelStateMachine.State.Playing;
-                    }
-                }
+                //foreach (Touch touch in Input.touches)
+                //{
+                //    if (touch.phase == TouchPhase.Began)
+                //    {
+                //        _pieceState = PieceState.Moving;
+                //        LevelStateMachine.Instance.state = LevelStateMachine.State.Playing;
+                //    }
+                //}
 
                 break;
 
@@ -84,6 +84,11 @@ public class Piece : MonoBehaviour
         }
     }
 
+    public void SetState(PieceState state)
+    {
+        _pieceState = state;
+    }
+
     private void FixedUpdate() //fixedupdate should be used for physics
     {
         if (_pieceState == PieceState.Moving || _pieceState == PieceState.Resting) //always be attracted toward planet
@@ -92,4 +97,5 @@ public class Piece : MonoBehaviour
             rb.AddForce(directionToPlanet.normalized * _gravityScale);
         }
     }
+
 }
