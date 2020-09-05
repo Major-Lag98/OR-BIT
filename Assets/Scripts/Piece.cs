@@ -18,8 +18,6 @@ public class Piece : MonoBehaviour
 
     [SerializeField] GameObject _world;
 
-    EdgeCollider2D _limit; //try to make this a reference!!
-
     [SerializeField] float _gravityScale = 9.81f;
 
     BoxCollider2D myCollider;
@@ -33,8 +31,6 @@ public class Piece : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         myCollider = GetComponent<BoxCollider2D>();
-        _limit = GameObject.Find("Limit").GetComponent<EdgeCollider2D>(); //I have to use this mess because referencing a prefab doesnt work for some reason... maybe make a singleton that holds objects in the scene to reference?
-        
     }
     private void Start()
     {
@@ -68,7 +64,7 @@ public class Piece : MonoBehaviour
                     if (waitTime <= 0)
                     {
                         _pieceState = PieceState.Resting;
-                        if (Physics2D.IsTouching(myCollider, _limit)) //check if we are touching the limit
+                        if (Physics2D.IsTouching(myCollider, GameAssets.Instance.limitInScene)) //check if we are touching the limit
                         {
                             Debug.Log("we have lost");
                             LevelStateMachine.Instance.state = LevelStateMachine.State.Lose;
