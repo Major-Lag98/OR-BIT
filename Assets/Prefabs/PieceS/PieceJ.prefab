@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8138315662114494248}
   - component: {fileID: 1164366825533116708}
   - component: {fileID: 610355446626308475}
+  - component: {fileID: 7198037321615858307}
+  - component: {fileID: 9058334746349656523}
   m_Layer: 0
   m_Name: PieceJ
   m_TagString: Untagged
@@ -98,3 +100,55 @@ MonoBehaviour:
   _planet: {fileID: 5169046240365430703, guid: 10949a872a6fb654584eed9125614243, type: 3}
   _gravityScale: 9.81
   WaitTimeMax: 2
+--- !u!50 &7198037321615858307
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8522814359537079296}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 1
+  m_AngularDrag: 10
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
+--- !u!60 &9058334746349656523
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8522814359537079296}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 0.7392857}
+    newSize: {x: 0.6763285, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.25, y: -0.36964285}
+      - {x: -0.25, y: -0.10714286}
+      - {x: -0.0125, y: -0.10714286}
+      - {x: -0.0125, y: 0.36964285}
+      - {x: 0.25, y: 0.36964285}
+      - {x: 0.25, y: -0.36964285}

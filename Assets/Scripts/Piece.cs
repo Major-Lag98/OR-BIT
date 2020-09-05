@@ -20,7 +20,7 @@ public class Piece : MonoBehaviour
 
     [SerializeField] float _gravityScale = 9.81f;
 
-    BoxCollider2D myCollider;
+    Collider2D myCollider;
 
     Rigidbody2D rb;
 
@@ -30,7 +30,7 @@ public class Piece : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        myCollider = GetComponent<BoxCollider2D>();
+        myCollider = GetComponent<Collider2D>();
     }
     private void Start()
     {
