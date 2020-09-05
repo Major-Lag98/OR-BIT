@@ -11,12 +11,12 @@ public class Piece : MonoBehaviour
         Idle,
         Moving,
         Resting,
-        CrossedLine //maybe use this to discentigrate object like in Trickey Towers
+        CrossedLine //maybe use this state to discentigrate object like in Trickey Towers
     }
 
     PieceState _pieceState = PieceState.Idle;
 
-    [SerializeField] GameObject _world;
+    [SerializeField] GameObject _planet;
 
     [SerializeField] float _gravityScale = 9.81f;
 
@@ -58,10 +58,10 @@ public class Piece : MonoBehaviour
                 break;
 
             case LevelStateMachine.State.Playing: //We wait for the object to come to a rest
-                if (rb.velocity.magnitude <= 0.5f)
+                if (rb.velocity.magnitude <= 0.5f) //if the object is moving super slow we can pretty much say were resting
                 {
                     waitTime -= Time.deltaTime;
-                    if (waitTime <= 0)
+                    if (waitTime <= 0) //we waited long enough for movement, we are resting
                     {
                         _pieceState = PieceState.Resting;
                         if (Physics2D.IsTouching(myCollider, GameAssets.Instance.limitInScene)) //check if we are touching the limit
@@ -77,7 +77,7 @@ public class Piece : MonoBehaviour
                 }
                 else
                 {
-                    waitTime = WaitTimeMax; //reset timer if we suddenly move while resting
+                    waitTime = WaitTimeMax; //reset timer if we suddenly move while attempting to rest
                 }
                     
                 break;
@@ -88,7 +88,7 @@ public class Piece : MonoBehaviour
     {
         if (_pieceState == PieceState.Moving || _pieceState == PieceState.Resting) //always be attracted toward planet
         {
-            Vector2 directionToPlanet = _world.transform.position - transform.position;
+            Vector2 directionToPlanet = _planet.transform.position - transform.position;
             rb.AddForce(directionToPlanet.normalized * _gravityScale);
         }
     }

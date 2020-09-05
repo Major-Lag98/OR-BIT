@@ -39,7 +39,18 @@ public class LevelStateMachine : MonoBehaviour
 
     public void ReadyNextPiece()
     {
-        Instantiate(Piece, spawnPosition.position, Quaternion.identity);
+        if (LevelData.Instance.Q_Pieces.Count <= 0) //if dont have any pieces left to ready we have won
+        {
+            OnWin();
+            return;
+        }
+        Instantiate(LevelData.Instance.Q_Pieces.Dequeue(), spawnPosition.position, Quaternion.identity);
         state = State.Idle;
+    }
+
+    void OnWin()
+    {
+        state = State.win;
+        Debug.Log("We win yay");
     }
 }
