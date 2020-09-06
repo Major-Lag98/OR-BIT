@@ -25,7 +25,7 @@ public class PieceFlinger : MonoBehaviour
     float touchDistanceToStartFlinging = 0.5f;
 
     // If we're flinging
-    bool isFlinging = false;
+    public bool isFlinging = false;
 
     // Start is called before the first frame update
     void Awake()

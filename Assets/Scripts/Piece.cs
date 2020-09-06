@@ -35,6 +35,7 @@ public class Piece : MonoBehaviour
     private void Start()
     {
         waitTime = WaitTimeMax;
+        transform.Rotate(Vector3.forward * Random.Range(0, 360)); //piece will start with some random rotation
     }
 
     private void Update()
