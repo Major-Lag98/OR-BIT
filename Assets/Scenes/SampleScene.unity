@@ -565,7 +565,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 4
+  m_fontStyle: 5
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -746,6 +746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limitInScene: {fileID: 306660949}
+  UIAmountLeft: {fileID: 1054082676}
 --- !u!114 &1734408780
 MonoBehaviour:
   m_ObjectHideFlags: 0
