@@ -59,5 +59,34 @@ public class LevelStateMachine : MonoBehaviour
     {
         int amountRemaining = LevelData.Instance.PiecesQueue.Count;
         GameAssets.Instance.UIAmountLeft.SetText($"{amountRemaining} Left!");
+        UpdateNextPiecePreview();
+    }
+
+    void UpdateNextPiecePreview()
+    {
+        // PiecesQueue.Peek() will throw an exception if its empty, so we make sure its not here
+        if (LevelData.Instance.PiecesQueue.Count > 0)
+        {
+            // Grab the sprite from the next (prefab) piece
+            var nextPieceSprite = LevelData.Instance.PiecesQueue.Peek().GetComponent<SpriteRenderer>().sprite;
+
+            // The width ratio.
+            float widthRatio = (float)nextPieceSprite.texture.width / (float)nextPieceSprite.texture.height;
+
+            // These two calculations/clamps make sure that the scales balance and never go past 1.
+            float scaleY = Mathf.Clamp(1 / widthRatio, 0, 1); // Make sure if our width ratio is over 1, our Y scale will be brought down
+            float scaleX = Mathf.Clamp(widthRatio, 0, 1); // Make sure to clamp between 0 and 1
+
+            // Assign the sprite
+            GameAssets.Instance.NextPieceImage.sprite = nextPieceSprite;
+
+            // Set the scale
+            GameAssets.Instance.NextPieceImage.transform.localScale = new Vector3(scaleX, scaleY, 1);
+        }
+        else
+        {
+            GameAssets.Instance.NextPieceImage.sprite = null;
+            GameAssets.Instance.NextPieceImage.transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 }
