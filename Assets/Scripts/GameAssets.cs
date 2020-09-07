@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameAssets : MonoBehaviour //this class will help us reference things we neen
 {
@@ -17,4 +18,5 @@ public class GameAssets : MonoBehaviour //this class will help us reference thin
 
     public EdgeCollider2D limitInScene;
 
+    public TextMeshProUGUI UIAmountLeft;
 }

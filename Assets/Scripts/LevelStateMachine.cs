@@ -46,11 +46,18 @@ public class LevelStateMachine : MonoBehaviour
         }
         PieceFlinger.Instance.CurrentPieceBeingFlung = Instantiate(LevelData.Instance.PiecesQueue.Dequeue(), spawnPosition.position, Quaternion.identity).transform;
         state = State.Idle;
+        UpdateUIElements();
     }
 
     void OnWin()
     {
         state = State.win;
         Debug.Log("We win yay");
+    }
+
+    void UpdateUIElements()
+    {
+        int amountRemaining = LevelData.Instance.PiecesQueue.Count;
+        GameAssets.Instance.UIAmountLeft.SetText($"{amountRemaining} Left!");
     }
 }
