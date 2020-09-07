@@ -16,7 +16,7 @@ public class ButtonRotation : MonoBehaviour
     {
         if (isRotating)
         {
-            Transform piece = PieceFlinger.Instance.CurrentPieceBeingFlung.transform;
+            Transform piece = PieceFlinger.Instance.CurrentPieceBeingFlung?.transform;
 
             if (clockwise) //both with ? null checks
             {
