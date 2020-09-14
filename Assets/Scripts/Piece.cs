@@ -40,7 +40,7 @@ public class Piece : MonoBehaviour
 
     private void Update()
     {
-        if (_pieceState == PieceState.Resting) return; //do nothing if we have used
+        if (_pieceState == PieceState.Resting) return; //do nothing if this piece is resting
 
         
 
@@ -67,8 +67,7 @@ public class Piece : MonoBehaviour
                         _pieceState = PieceState.Resting;
                         if (Physics2D.IsTouching(myCollider, GameAssets.Instance.limitInScene)) //check if we are touching the limit
                         {
-                            Debug.Log("we have lost");
-                            LevelStateMachine.Instance.state = LevelStateMachine.State.Lose;
+                            LevelStateMachine.Instance.OnLose();
                         }
                         else
                         {

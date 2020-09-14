@@ -20,5 +20,8 @@ public class GameAssets : MonoBehaviour //this class will help us reference thin
     public EdgeCollider2D limitInScene;
 
     public TextMeshProUGUI UIAmountLeft;
+
     public Image NextPieceImage;
+
+    public GameObject UI;
 }

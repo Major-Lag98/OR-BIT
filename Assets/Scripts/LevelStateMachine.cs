@@ -9,6 +9,8 @@ public class LevelStateMachine : MonoBehaviour
 
     [SerializeField] Transform spawnPosition;
 
+    Animator uiAnimator;
+
     public enum State 
     {
         Intro,      //Let things smoothly settle in after scene load
@@ -23,22 +25,26 @@ public class LevelStateMachine : MonoBehaviour
 
     public static LevelStateMachine Instance; //make singleton
 
-    private void Awake()
+    private void Awake() //set singleton and grab the UI Animator
     {
         if (Instance == null)
         {
             Instance = this;
         }
+
+        
     }
 
     private void Start()
     {
         ReadyNextPiece();
+        uiAnimator = GameAssets.Instance.UI.GetComponent<Animator>();
     }
 
 
     public void ReadyNextPiece()
     {
+
         if (LevelData.Instance.PiecesQueue.Count <= 0) //if dont have any pieces left to ready we have won
         {
             OnWin();
@@ -53,6 +59,14 @@ public class LevelStateMachine : MonoBehaviour
     {
         state = State.win;
         Debug.Log("We win yay");
+        uiAnimator.SetTrigger("OnWin");
+    }
+
+    public void OnLose() //called by piece
+    {
+        state = State.Lose;
+        Debug.Log("we have lost");
+        uiAnimator.SetTrigger("OnLoss");
     }
 
     void UpdateUIElements()
