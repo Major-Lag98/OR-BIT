@@ -28,4 +28,6 @@ public class GameAssets : MonoBehaviour //this class will help us reference thin
     public LineRenderer ForceIndicator;
 
     public GameObject SpawnPosition;
+
+    public TextMeshProUGUI UINextText;
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LevelStateMachine : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class LevelStateMachine : MonoBehaviour
     [SerializeField] GameObject Piece = null;
 
     [SerializeField] Transform spawnPosition;
+
+    //[SerializeField] TextMeshProUGUI nextText;
 
     Animator uiAnimator;
 
@@ -97,10 +100,12 @@ public class LevelStateMachine : MonoBehaviour
             // Set the scale
             GameAssets.Instance.NextPieceImage.transform.localScale = new Vector3(scaleX, scaleY, 1);
         }
-        else
+        else //deactivate gameobject to not have a white box and get rid of the next text
         {
             GameAssets.Instance.NextPieceImage.sprite = null;
             GameAssets.Instance.NextPieceImage.transform.localScale = new Vector3(1, 1, 1);
+            GameAssets.Instance.NextPieceImage.gameObject.SetActive(false); 
+            GameAssets.Instance.UINextText.SetText("");
         }
     }
 }

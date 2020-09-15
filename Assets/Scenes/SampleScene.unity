@@ -2781,6 +2781,7 @@ MonoBehaviour:
   UI: {fileID: 2138990408}
   ForceIndicator: {fileID: 2024088781}
   SpawnPosition: {fileID: 1398994147}
+  UINextText: {fileID: 299198259}
 --- !u!114 &1734408780
 MonoBehaviour:
   m_ObjectHideFlags: 0
