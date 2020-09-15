@@ -24,4 +24,8 @@ public class GameAssets : MonoBehaviour //this class will help us reference thin
     public Image NextPieceImage;
 
     public GameObject UI;
+
+    public LineRenderer ForceIndicator;
+
+    public GameObject SpawnPosition;
 }
