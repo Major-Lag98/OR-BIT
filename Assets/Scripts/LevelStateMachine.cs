@@ -87,6 +87,7 @@ public class LevelStateMachine : MonoBehaviour
         {
             GameAssets.Instance.NextPieceImage.sprite = null;
             GameAssets.Instance.NextPieceImage.transform.localScale = new Vector3(1, 1, 1);
+            GameAssets.Instance.NextPieceImage.color = new Color(0, 0, 0, 0);
         }
     }
 }
