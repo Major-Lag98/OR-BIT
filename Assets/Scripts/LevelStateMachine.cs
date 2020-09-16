@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LevelStateMachine : MonoBehaviour
 {
@@ -62,6 +63,16 @@ public class LevelStateMachine : MonoBehaviour
     {
         state = State.win;
         Debug.Log("We win yay");
+
+        var index = SceneManager.GetActiveScene().buildIndex;
+        var last = PlayerPrefs.GetInt("levels");
+
+        if (index > last)
+        {
+            PlayerPrefs.SetInt("levels", 1);
+            PlayerPrefs.Save();
+        }
+
         uiAnimator.SetTrigger("OnWin");
     }
 
