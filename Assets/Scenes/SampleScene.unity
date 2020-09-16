@@ -2706,7 +2706,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2e089c54993dc47a38b8c9ea48146c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Piece: {fileID: 1569420579288847766, guid: dbfc64be8ce8712478fea552101c8183, type: 3}
   spawnPosition: {fileID: 1398994148}
   state: 1
 --- !u!4 &1734408778

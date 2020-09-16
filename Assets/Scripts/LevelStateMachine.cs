@@ -1,17 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.SceneManagement;
 
 public class LevelStateMachine : MonoBehaviour
 {
 
-    [SerializeField] GameObject Piece = null;
-
     [SerializeField] Transform spawnPosition;
-
-    //[SerializeField] TextMeshProUGUI nextText;
 
     Animator uiAnimator;
 
