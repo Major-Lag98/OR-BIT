@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LevelStateMachine : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class LevelStateMachine : MonoBehaviour
     [SerializeField] GameObject Piece = null;
 
     [SerializeField] Transform spawnPosition;
+
+    //[SerializeField] TextMeshProUGUI nextText;
+
+    Animator uiAnimator;
 
     public enum State 
     {
@@ -23,22 +28,26 @@ public class LevelStateMachine : MonoBehaviour
 
     public static LevelStateMachine Instance; //make singleton
 
-    private void Awake()
+    private void Awake() //set singleton and grab the UI Animator
     {
         if (Instance == null)
         {
             Instance = this;
         }
+
+        
     }
 
     private void Start()
     {
         ReadyNextPiece();
+        uiAnimator = GameAssets.Instance.UI.GetComponent<Animator>();
     }
 
 
     public void ReadyNextPiece()
     {
+
         if (LevelData.Instance.PiecesQueue.Count <= 0) //if dont have any pieces left to ready we have won
         {
             OnWin();
@@ -53,6 +62,14 @@ public class LevelStateMachine : MonoBehaviour
     {
         state = State.win;
         Debug.Log("We win yay");
+        uiAnimator.SetTrigger("OnWin");
+    }
+
+    public void OnLose() //called by piece
+    {
+        state = State.Lose;
+        Debug.Log("we have lost");
+        uiAnimator.SetTrigger("OnLoss");
     }
 
     void UpdateUIElements()
@@ -83,11 +100,12 @@ public class LevelStateMachine : MonoBehaviour
             // Set the scale
             GameAssets.Instance.NextPieceImage.transform.localScale = new Vector3(scaleX, scaleY, 1);
         }
-        else
+        else //deactivate gameobject to not have a white box and get rid of the next text
         {
             GameAssets.Instance.NextPieceImage.sprite = null;
             GameAssets.Instance.NextPieceImage.transform.localScale = new Vector3(1, 1, 1);
-            GameAssets.Instance.NextPieceImage.color = new Color(0, 0, 0, 0);
+            GameAssets.Instance.NextPieceImage.gameObject.SetActive(false); 
+            GameAssets.Instance.UINextText.SetText("");
         }
     }
 }

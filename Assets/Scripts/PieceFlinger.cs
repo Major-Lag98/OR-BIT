@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Handles flinging of pieces and force indicator
+/// </summary>
 public class PieceFlinger : MonoBehaviour
 {
 
@@ -27,11 +31,19 @@ public class PieceFlinger : MonoBehaviour
     // If we're flinging
     public bool isFlinging = false;
 
+    LineRenderer forceIndicator;
+
+
     // Start is called before the first frame update
     void Awake()
     {
         if (Instance == null)
             Instance = this;
+    }
+    private void Start()
+    {
+        forceIndicator = GameAssets.Instance.ForceIndicator;
+        forceIndicator.SetPosition(1, SpawnPosition.position); //index 1 is the pointy end of our arrow bacause thats how i drew the sprite lol
     }
 
     // Update is called once per frame
@@ -43,7 +55,10 @@ public class PieceFlinger : MonoBehaviour
 
         if(Input.touchCount == 1 && Input.touches[0].phase == TouchPhase.Began)
         {
+            forceIndicator.SetPosition(0, SpawnPosition.position);
+            forceIndicator.gameObject.SetActive(true);
             var world = Camera.main.ScreenToWorldPoint(Input.touches[0].position); // Get the world
+            
 
             // We are flinging if we clicked within the acceptable distance
             isFlinging = Vector3.Distance(new Vector3(SpawnPosition.position.x, SpawnPosition.position.y), new Vector3(world.x, world.y)) <= touchDistanceToStartFlinging;
@@ -64,6 +79,7 @@ public class PieceFlinger : MonoBehaviour
              */
             var t = Mathf.Clamp(maxDistanceDrag / distance, 0, 1);
             CurrentPieceBeingFlung.position = Vector3.Lerp(spawnPos, pos, t); // Lerp between the two positions
+            forceIndicator.SetPosition(0, CurrentPieceBeingFlung.position);
 
         }else if(isFlinging && Input.touchCount == 1 && Input.touches[0].phase == TouchPhase.Ended)
         {
@@ -84,6 +100,7 @@ public class PieceFlinger : MonoBehaviour
             }
 
             isFlinging = false;
+            forceIndicator.gameObject.SetActive(false);
         }
         
 
