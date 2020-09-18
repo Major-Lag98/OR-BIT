@@ -11,6 +11,7 @@ public class Piece : MonoBehaviour
         Idle,
         Moving,
         Resting,
+        Exploding,
         CrossedLine //maybe use this state to discentigrate object like in Trickey Towers
     }
 

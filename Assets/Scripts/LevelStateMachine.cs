@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelStateMachine : MonoBehaviour
 {
-
+    [SerializeField] Transform worldPostion;
     [SerializeField] Transform spawnPosition;
 
     Animator uiAnimator;
@@ -69,6 +69,8 @@ public class LevelStateMachine : MonoBehaviour
         }
 
         uiAnimator.SetTrigger("OnWin");
+
+        StartCoroutine(Explode());
     }
 
     public void OnLose() //called by piece
@@ -76,6 +78,20 @@ public class LevelStateMachine : MonoBehaviour
         state = State.Lose;
         Debug.Log("we have lost");
         uiAnimator.SetTrigger("OnLoss");
+    }
+
+    IEnumerator Explode()
+    {
+        //yield return new WaitForSeconds(2);
+        var pieces = FindObjectsOfType<Piece>(); // Very alden-like but shouldn't be an issue since it's a single call at the end of the game
+        foreach(var piece in pieces)
+        {
+            piece.SetState(Piece.PieceState.Exploding); // New state to keep the pieces from moving towards the planet
+            var dir = (piece.transform.position - worldPostion.position).normalized; // Get direction 
+            dir.Scale(new Vector3(750,750,0)); // Scale by some force (magic number)
+            piece.GetComponent<Rigidbody2D>().AddForce(dir); // Add force
+        }
+        yield break;
     }
 
     void UpdateUIElements()
