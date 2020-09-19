@@ -10,6 +10,11 @@ public class LevelStateMachine : MonoBehaviour
 
     Animator uiAnimator;
 
+    public delegate void OnStateChanged();
+
+    OnStateChanged OnWinState;
+    OnStateChanged OnLoseState;
+
     public enum State 
     {
         Intro,      //Let things smoothly settle in after scene load
@@ -68,9 +73,11 @@ public class LevelStateMachine : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        uiAnimator.SetTrigger("OnWin");
+        //uiAnimator.SetTrigger("OnWin");
 
         StartCoroutine(Explode());
+
+        OnWinState?.Invoke();
     }
 
     public void OnLose() //called by piece
@@ -78,6 +85,9 @@ public class LevelStateMachine : MonoBehaviour
         state = State.Lose;
         Debug.Log("we have lost");
         uiAnimator.SetTrigger("OnLoss");
+
+        OnLoseState?.Invoke();
+
     }
 
     IEnumerator Explode()
@@ -130,4 +140,16 @@ public class LevelStateMachine : MonoBehaviour
             GameAssets.Instance.UINextText.SetText("");
         }
     }
+
+    public void AddOnWinDelegate(OnStateChanged del)
+        => OnWinState += del;
+
+    public void AddOnLoseDelegate(OnStateChanged del)
+        => OnLoseState += del;
+
+    public void RemoveOnWinDelegate(OnStateChanged del)
+        => OnWinState -= del;
+
+    public void RemoveOnLoseDelegate(OnStateChanged del)
+        => OnLoseState -= del;
 }
