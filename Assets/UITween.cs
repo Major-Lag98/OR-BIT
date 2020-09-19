@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class UITween : MonoBehaviour
 {
+	public enum StateTypeEnum { Win, Lose }
+
+	public StateTypeEnum StateType = StateTypeEnum.Win; 
 	public float Delay = 0f;
 	public float TimeToTween = 1f;
 
@@ -16,12 +19,15 @@ public class UITween : MonoBehaviour
 		transform.localScale = new Vector3(0,0,0); // Start the scale at 0
 		gameObject.SetActive(false); // Disable the object until we win
 
-		// Set active when we win (new delegates in LevelStateMachine)
-		LevelStateMachine.Instance.AddOnWinDelegate(() => gameObject.SetActive(true));
-    }
+		if(StateType == StateTypeEnum.Win)
+			// Set active when we win (new delegates in LevelStateMachine)
+			LevelStateMachine.Instance.AddOnWinDelegate(() => gameObject.SetActive(true));
+		else
+			LevelStateMachine.Instance.AddOnLoseDelegate(() => gameObject.SetActive(true));
+	}
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	void Update()
     {
 		counter += Time.deltaTime; // Count up
 
