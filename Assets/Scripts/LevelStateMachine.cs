@@ -9,6 +9,7 @@ public class LevelStateMachine : MonoBehaviour
     [SerializeField] Transform spawnPosition;
 
     Animator uiAnimator;
+    //GameManager gameManager;
 
     public delegate void OnStateChanged();
 
@@ -43,6 +44,7 @@ public class LevelStateMachine : MonoBehaviour
     {
         ReadyNextPiece();
         uiAnimator = GameAssets.Instance.UI.GetComponent<Animator>();
+        //gameManager = FindObjectOfType<GameManager>();
     }
 
 
@@ -64,14 +66,9 @@ public class LevelStateMachine : MonoBehaviour
         state = State.win;
         Debug.Log("We win yay");
 
-        var index = SceneManager.GetActiveScene().buildIndex;
-        var last = PlayerPrefs.GetInt("levels");
-
-        if (index > last)
-        {
-            PlayerPrefs.SetInt("levels", 1);
-            PlayerPrefs.Save();
-        }
+        int index = SceneManager.GetActiveScene().buildIndex; //on win save completed levels
+        GameManager.Instance.CheckLevelIndexComplete(index);
+        
 
         //uiAnimator.SetTrigger("OnWin");
 
