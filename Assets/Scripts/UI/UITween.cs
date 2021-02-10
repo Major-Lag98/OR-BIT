@@ -4,25 +4,29 @@ using UnityEngine;
 
 public class UITween : MonoBehaviour
 {
-	public enum StateTypeEnum { Win, Lose }
+	public enum StateTypeEnum { Win, Lose };
 
 	public StateTypeEnum StateType = StateTypeEnum.Win; 
+
+	[Tooltip("How long until animation starts in seconds")]
 	public float Delay = 0f;
-	public float TimeToTween = 1f;
+
+	[Tooltip("How long should the animation be in seconds")]
+	public float TimeToTween = 1f; 
 
 	float counter = 0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+	// Start is called before the first frame update
+	void Start()
+	{
 		counter -= Delay; // We subtract the delay so we don't need a second timer
-		transform.localScale = new Vector3(0,0,0); // Start the scale at 0
+		transform.localScale = new Vector3(0, 0, 0); // Start the scale at 0
 		gameObject.SetActive(false); // Disable the object until we win
 
-		if(StateType == StateTypeEnum.Win)
+		if (StateType == StateTypeEnum.Win)
 			// Set active when we win (new delegates in LevelStateMachine)
 			LevelStateMachine.Instance.AddOnWinDelegate(() => gameObject.SetActive(true));
-		else
+		if (StateType == StateTypeEnum.Lose)
 			LevelStateMachine.Instance.AddOnLoseDelegate(() => gameObject.SetActive(true));
 	}
 

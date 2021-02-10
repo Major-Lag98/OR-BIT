@@ -77,7 +77,7 @@ public class LevelStateMachine : MonoBehaviour
         OnWinState?.Invoke();
     }
 
-    public void OnLose() //called by piece
+    public void OnLose() //called by piece if over line
     {
         state = State.Lose;
         Debug.Log("we have lost");

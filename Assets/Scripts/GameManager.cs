@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour //use to save and load game data
         {
             Instance = this;
             DontDestroyOnLoad(this);
-            levelsCompleted = PlayerPrefs.GetInt("LevelsCompleted");
+            levelsCompleted = PlayerPrefs.GetInt("LevelsCompleted", 0);
         }
         else Destroy(this);
     }
