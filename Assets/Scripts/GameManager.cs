@@ -40,4 +40,9 @@ public class GameManager : MonoBehaviour //use to save and load game data
             SetLevelsCompleted(currIndex);
         }
     }
+
+    public void UpdateValues()
+    {
+        levelsCompleted = PlayerPrefs.GetInt("LevelsCompleted", 0);
+    }
 }
