@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelStateMachine : MonoBehaviour
 {
-    [SerializeField] Transform worldPostion;
+    [SerializeField] Transform planetPostion;
     [SerializeField] Transform spawnPosition;
 
     Animator uiAnimator;
@@ -94,9 +94,11 @@ public class LevelStateMachine : MonoBehaviour
         foreach(var piece in pieces)
         {
             piece.SetState(Piece.PieceState.Exploding); // New state to keep the pieces from moving towards the planet
-            var dir = (piece.transform.position - worldPostion.position).normalized; // Get direction 
+            var dir = (piece.transform.position - planetPostion.position).normalized; // Get direction 
             dir.Scale(new Vector3(750,750,0)); // Scale by some force (magic number)
-            piece.GetComponent<Rigidbody2D>().AddForce(dir); // Add force
+            var RB = piece.GetComponent<Rigidbody2D>(); // get reference
+            RB.AddForce(dir); // Add force
+            RB.drag = 0; // get rid of drag
         }
         yield break;
     }

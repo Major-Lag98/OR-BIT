@@ -21,6 +21,9 @@ public class Piece : MonoBehaviour
 
     [SerializeField] float _gravityScale = 9.81f;
 
+    [SerializeField, Tooltip("Second until piece deletes itself after win")]
+    float explodedTimeout = 1f; 
+
     Collider2D myCollider;
 
     Rigidbody2D rb;
@@ -42,8 +45,17 @@ public class Piece : MonoBehaviour
     private void Update()
     {
         if (_pieceState == PieceState.Resting) return; //do nothing if this piece is resting
-
         
+        if (_pieceState == PieceState.Exploding)
+        {
+            explodedTimeout -= Time.deltaTime;
+            if (explodedTimeout <= 0)
+            {
+                Destroy(this.gameObject); //clear up some resorces after win
+            }
+        }
+
+
 
         switch (LevelStateMachine.Instance.state)
         {
