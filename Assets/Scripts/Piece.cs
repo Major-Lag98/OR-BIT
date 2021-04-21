@@ -21,6 +21,8 @@ public class Piece : MonoBehaviour
 
     [SerializeField] float _gravityScale = 9.81f;
 
+    float _acceptable_Resting_Velocity = 0.05f;
+
     [SerializeField, Tooltip("Second until piece deletes itself after win")]
     float explodedTimeout = 1f; 
 
@@ -72,7 +74,7 @@ public class Piece : MonoBehaviour
                 break;
 
             case LevelStateMachine.State.Playing: //We wait for the object to come to a rest
-                if (rb.velocity.magnitude <= 0.5f) //if the object is moving super slow we can pretty much say were resting
+                if (rb.velocity.magnitude <= _acceptable_Resting_Velocity) //if the object is moving super slow we can pretty much say were resting
                 {
                     waitTime -= Time.deltaTime;
                     if (waitTime <= 0) //we waited long enough for movement, we are resting
@@ -91,6 +93,7 @@ public class Piece : MonoBehaviour
                 else
                 {
                     waitTime = WaitTimeMax; //reset timer if we suddenly move while attempting to rest
+                    _acceptable_Resting_Velocity += Time.deltaTime * 0.01f;
                 }
                     
                 break;
