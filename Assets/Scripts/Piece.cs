@@ -93,7 +93,7 @@ public class Piece : MonoBehaviour
                 else
                 {
                     waitTime = WaitTimeMax; //reset timer if we suddenly move while attempting to rest
-                    _acceptable_Resting_Velocity += Time.deltaTime * 0.01f;
+                    _acceptable_Resting_Velocity += Time.deltaTime * 0.5f;
                 }
                     
                 break;
