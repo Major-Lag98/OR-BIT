@@ -106,7 +106,7 @@ public class LevelStateMachine : MonoBehaviour
     void UpdateUIElements()
     {
         int amountRemaining = LevelData.Instance.PiecesQueue.Count;
-        GameAssets.Instance.UIAmountLeft.SetText($"{amountRemaining} Left!");
+        GameAssets.Instance.UIAmountLeft.SetText($"{amountRemaining} Left");
         UpdateNextPiecePreview();
     }
 
